@@ -28,14 +28,18 @@ export const DogComponent: React.FC<{ dog: Dog, favorite: Favorite }> = ({ dog, 
 
                     </div>
                     <div className="grid-items">
-                        <img src={dog.displayImage} width="200px" height="auto" style={{ border: '1px solid' }}></img>
+                        <img className="" src={dog.displayImage} width="200px" height="auto" style={{ border: '1px solid' }}></img>
                     </div>
                     <div className="grid-items">
                         <div className={`not-favorite ${isFavorite(dog) ? 'favorite' : ''}`} onClick={() => {
-                            const favorite: Favorite = { id: dog.id, name: dog.breed } as any
+                            const favorite: Favorite = { 
+                                id: dog.id, 
+                                name: dog.breed,
+                                imgUrl: dog.displayImage
+                            }
                             setFavorite(favorite);
                         }}>
-                            <img src={`https://freepngimg.com/download/dog/163170-photos-puppy-dog-face-png-image-high-quality.png`} width="40px"></img>
+                            <img src={`./favorite-dog.png`} width="40px"></img>
                         </div>
                     </div>
                     <div className="grid-items grid-item-title">

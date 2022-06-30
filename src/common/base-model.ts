@@ -20,6 +20,7 @@ export interface Image {
 }
 
 export interface Favorite {
-	id: string;
-	name: string;
+	id: string | undefined;
+	name: string | undefined;
+	imgUrl: string | undefined;
 }

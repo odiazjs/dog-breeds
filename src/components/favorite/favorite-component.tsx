@@ -1,10 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { AppState } from "../../redux/AppReducer";
 import { favoriteModel } from "./model";
 
-export const FavoriteComponent: React.FC<any> = ({ appState }) => {
+export const FavoriteComponent: React.FC<any> = ({ appState }: { appState: AppState }) => {
 
-    const [state, setState] = useState({...favoriteModel, ...appState.favorite});
+    const [state, setState] = useState({ ...favoriteModel, ...appState.favorite });
 
     console.log('Favorite State : ', appState.favorite, state)
 
@@ -14,17 +14,20 @@ export const FavoriteComponent: React.FC<any> = ({ appState }) => {
                 <div className="grid-container">
                     <div className="grid-items grid-item-title">
                         {appState.favorite ?
-                            <div>
-                                My favorite breed is {appState.favorite.name.toUpperCase()} !
-                            </div> :
-                            <div>
+                            <React.Fragment>
+                                <div>
+                                    My favorite breed is {appState?.favorite?.name?.toUpperCase()} !
+                                </div>
+                                <div className="fav-img">
+                                    <img src={appState?.favorite?.imgUrl} width="115px" height="90px"></img>
+                                </div>
+                            </React.Fragment>
+                            : <div>
                                 {state.title}
-                                <span className="fav-img">
-                                    <img src={`https://freepngimg.com/download/dog/163170-photos-puppy-dog-face-png-image-high-quality.png`} width="45px"></img>
+                                <span className="fav-img img-dot">
+                                    <img src={`./favorite-dog.png`} width="45px"></img>
                                 </span>
-                            </div>
-                        }
-
+                            </div>}
                     </div>
                 </div>
             </div>

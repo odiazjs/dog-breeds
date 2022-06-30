@@ -20,7 +20,7 @@
   }
   
 .app-title {
-	padding: 2.5rem;
+	padding: 1rem;
 	color: snow;
 	background: saddlebrown;
 }
@@ -43,7 +43,7 @@
   
   .content {
 	grid-area: content;
-	padding: 175px 0px !important;
+	padding: 225px 0px !important;
 	margin: 15px;
   }
   
@@ -199,11 +199,14 @@
 	opacity: 1 !important;
   }
 
+  .img-dot {
+	border-radius: 50%;
+}
+
   .favorite-container {
 	background: bisque;
 	.fav-img{
-		padding: 0px 10px;
-		line-height: 1;
+		padding: 8px;
 	}
   }
 

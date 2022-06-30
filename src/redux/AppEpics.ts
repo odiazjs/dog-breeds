@@ -37,13 +37,6 @@ export class AppEpics {
 			map((action: Action<any>) => {
 				console.info(`Epic fired: { setStateEpic } - Action: ${JSON.stringify(action)}`);
 				return { type: AppActions.SET_STATE, payload: action.payload };
-				// return state$.pipe(
-				// 	map((state:any) => {
-				// 		const { favorite } = action.payload;
-				// 		const mergedState = {...state.appState, favorite }
-				// 		return { type: AppActions.SET_STATE, payload: mergedState };
-				// 	})
-				// )
 			})
 		);
 	};
