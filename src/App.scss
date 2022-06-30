@@ -22,6 +22,7 @@
 .app-title {
 	padding: 2.5rem;
 	color: snow;
+	background: saddlebrown;
 }
 
 .loading {
@@ -48,7 +49,7 @@
   
   .header {
 	grid-area: header;
-	height: 12vh;
+	height: auto;
 	position: fixed;
 	width: -webkit-fill-available;
 	z-index: 2;
@@ -78,7 +79,6 @@
   .box {
 	color: #fff;
 	border-radius: 0px;
-	padding: 4px;
 	font-size: 150%;
   }
   
@@ -191,11 +191,23 @@
   }
 
   .not-favorite {
-	position: absolute;
-	right: 110px;
 	opacity: 0.5;
+	float: right;
   }
 
   .favorite {
 	opacity: 1 !important;
+  }
+
+  .favorite-container {
+	background: bisque;
+	.fav-img{
+		padding: 0px 10px;
+		line-height: 1;
+	}
+  }
+
+  .fav-title {
+	  font-weight: 300;
+	  font-size: medium;
   }

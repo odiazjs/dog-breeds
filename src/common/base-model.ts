@@ -12,10 +12,14 @@ export interface Dog extends Base {
 	subbreeds: string[];
 	displayImage: string;
 	images: Image[];
-	isFavorite: boolean;
 }
 
 export interface Image {
 	id: string;
 	url: string;
+}
+
+export interface Favorite {
+	id: string;
+	name: string;
 }

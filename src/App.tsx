@@ -3,17 +3,17 @@ import { connect, useDispatch } from 'react-redux';
 import { Action, Dispatch } from 'redux';
 import './App.scss';
 import { ApolloActions } from './redux/ApolloActions';
-import { AppState, RootState } from './redux/AppReducer';
+import { AppState } from './redux/AppReducer';
 import { GET_BREEDS } from './redux/breeds/breeds.query';
-import { DogComponent } from './components/DogComponent';
-import { Dog } from './common/base-model';
 import { cloneDeep } from 'lodash';
+import { FavoriteComponent } from './components/favorite/favorite-component';
+import { DogListComponent } from './components/dog-list/dog-list.component';
 
-export const App: React.FC<RootState> = (redux: any) => {
-	
+export const App: React.FC<{ appState: AppState, store: any }> = (redux: { appState: AppState, store: any }) => {
+
 	const { appState, store } = redux;
 	const dispatch = useDispatch();
-	console.log(' App Store: ', store);
+	console.log(' App State: ', { appState, store });
 
 	const [state, setState] = useState({ dogs: [] as any });
 
@@ -23,31 +23,18 @@ export const App: React.FC<RootState> = (redux: any) => {
 		[dispatch]
 	);
 
-	const toggleFavorites = (dog: Dog) => {
-		const mapped: Dog[] = state.dogs.map((item: Dog) => {
-			if (item.id != dog.id) {
-				item.isFavorite = false;
-			} else {
-				item.isFavorite = true;
-			}
-			return item;
-		})
-		setState({dogs: mapped})
-	}
-
 	useEffect(() => {
-        makeBreedsQuery();
-		
+		makeBreedsQuery();
 		store.subscribe(() => {
 			const state = store.getState();
-			if (state.appState.storeState.dogs.length) {
+			if (state.appState.dogs.length) {
 				setState({
-					dogs: [...cloneDeep(state.appState.storeState.dogs)] as any
+					dogs: [...cloneDeep(state.appState.dogs)] as any
 				})
 			}
 		})
 
-    }, []);
+	}, []);
 
 	return (
 		<div className={`App ${appState.isLoadingData ? 'loading' : ''}`}>
@@ -55,17 +42,10 @@ export const App: React.FC<RootState> = (redux: any) => {
 				<div className="wrapper">
 					<div className="box header">
 						<div className="app-title">Dog Breeds</div>
+						<FavoriteComponent appState={appState as any}></FavoriteComponent>
 					</div>
 					<div className="box content">
-
-						{/** Content */}
-						{state.dogs.map((dog: any) => {
-							return <DogComponent dog={dog} fun={{toggleFavorites}} ></DogComponent>
-						})}
-
-					</div>
-					<div className="box footer">
-
+						<DogListComponent dogs={state.dogs} favorite={appState?.favorite}></DogListComponent>
 					</div>
 				</div>
 			</div>

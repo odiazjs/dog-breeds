@@ -11,7 +11,7 @@ export class ApolloActions {
 		return Object.assign(
 			{
 				type: ApolloActions.GRAPHQL,
-				payload: {}
+				payload: {  }
 			},
 			{ ...action }
 		);
@@ -22,19 +22,15 @@ export class ApolloActions {
 			{
 				type: ApolloActions.QUERY,
 				payload: {}
-			},
-			{ ...action }
+			}
 		);
 	}
 
 	static mutation(action: ApolloAction<any>): GraphqlAction<AppState> {
-		return Object.assign(
-			{
-				type: ApolloActions.MUTATION,
-				payload: {}
-			},
-			{ ...action }
-		);
+		return {
+			type: ApolloActions.GRAPHQL,
+			payload: {} as any
+		}
 	}
 }
 
