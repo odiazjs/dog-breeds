@@ -1,0 +1,201 @@
+.App {
+	text-align: center;
+  }
+  
+  /* CSS Grid System */
+  // Learn more about this technique:
+  // @link https://moderncss.dev/solutions-to-replace-the-12-column-grid/
+  
+  * {
+	box-sizing: border-box;
+	color: #424242;
+	font-weight: 700;
+  }
+  
+  body {
+	margin: 0px;
+	min-height: 100vh;
+	font-family: "Ubuntu", sans-serif;
+	color: black;
+  }
+  
+.app-title {
+	padding: 2.5rem;
+	color: snow;
+}
+
+.loading {
+	opacity: 0.6;
+    pointer-events: none;
+	background-color: darkgray;
+}
+
+
+  .sidebar {
+	height: 1px;
+	grid-area: sidebar;
+  }
+  
+  .sidebar2 {
+	grid-area: sidebar2;
+  }
+  
+  .content {
+	grid-area: content;
+	padding: 175px 0px !important;
+	margin: 15px;
+  }
+  
+  .header {
+	grid-area: header;
+	height: 12vh;
+	position: fixed;
+	width: -webkit-fill-available;
+	z-index: 2;
+  }
+  
+  .footer {
+	grid-area: footer;
+  }
+  
+  .wrapper {
+	background-color: #fff;
+	color: #444;
+	height: 100vh;
+  }
+  
+  .wrapper {
+	display: grid;
+	grid-gap: 1em;
+	grid-template-areas:
+	  "header"
+	  "sidebar"
+	  "content"
+	  "sidebar2"
+	  "footer"
+  }
+  
+  .box {
+	color: #fff;
+	border-radius: 0px;
+	padding: 4px;
+	font-size: 150%;
+  }
+  
+  .header,
+  .footer {
+	background-color: #999;
+  }
+  
+  .sidebar2 {
+	background-color: #ccc;
+	color: #444;
+  }
+  
+  
+  .card {
+	background-color: snow;
+	border: 0px solid snow;
+	box-shadow: darkgrey 4px 4px 4px 4px;
+	color: white;
+	padding: 1rem;
+	height: auto;
+	font-size: 1rem;
+  }
+  
+  .cards {
+	max-width: auto;
+	margin: 0 auto;
+	display: grid;
+	gap: 1rem;
+	//grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  
+  @media only screen and (min-width: 600px) {
+	.wrapper {
+	  grid-gap: 20px;
+	  grid-template-columns: 40px auto 40px;
+	  grid-template-areas:
+		"header  header  header"
+		"sidebar content sidebar2"
+		"footer  footer  footer";
+	  max-width: auto;
+	}
+  }
+  
+  .primary-btn {
+	background: gold;
+	border: none;
+	color: black;
+	font-size: 1.25rem;
+	margin: 15px 10px;
+	width: 120px;
+	height: 45px;
+  }
+  
+  .grid-container {
+	display: grid;
+	grid-template-columns: auto auto auto;
+  }
+  
+  .grid-items {
+	padding: 5px;
+	align-content: center;
+  }
+  
+  .grid-item-title {
+	grid-column: 1 / 4;
+	padding: 0.3rem;
+  }
+  
+  .light {
+	font-weight: 500;
+  }
+  
+  .grid-item-title-light {
+	grid-column: 1 / 4;
+	padding: 0.3rem;
+	font-weight: 500;
+  }
+  
+  .grid-container-roster {
+	display: grid;
+	grid-template-columns: 48% 4% 48%;
+	.grid-item-title {
+	  font-weight: 700 !important;
+	}
+	.grid-items {
+	  font-weight: 400;
+	}
+  }
+  
+  .grid-container-lineup-events {
+	display: grid;
+	grid-template-columns: 100%;
+  }
+  
+  .roster-container {
+	border: 1px solid;
+	padding: 5px;
+	background: darkseagreen;
+  }
+  
+  .roster-video {
+	grid-column: 2/2;
+	grid-row: 1/15;
+  }
+  
+  .under {
+	background-color: aquamarine;
+  }
+
+  .not-favorite {
+	position: absolute;
+	right: 110px;
+	opacity: 0.5;
+  }
+
+  .favorite {
+	opacity: 1 !important;
+  }

@@ -1,0 +1,11 @@
+query GetBreeds($name: String) {
+	dogs {
+		id,
+		breed,
+		subbreeds,
+		images {
+			id,
+			url
+		}
+  }
+}
