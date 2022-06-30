@@ -7,6 +7,15 @@ export interface Base {
 	updatedOn?: string;
 }
 
-export interface Breed extends Base {
-	
+export interface Dog extends Base {
+	breed: string;
+	subbreeds: string[];
+	displayImage: string;
+	images: Image[];
+	isFavorite: boolean;
+}
+
+export interface Image {
+	id: string;
+	url: string;
 }

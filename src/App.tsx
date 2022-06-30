@@ -1,50 +1,74 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Action, Dispatch } from 'redux';
 import './App.scss';
 import { ApolloActions } from './redux/ApolloActions';
 import { AppState, RootState } from './redux/AppReducer';
 import { GET_BREEDS } from './redux/breeds/breeds.query';
-import { Breed } from './common/base-model';
+import { DogComponent } from './components/DogComponent';
+import { Dog } from './common/base-model';
+import { cloneDeep } from 'lodash';
 
-export const App: React.FC<RootState> = (state: RootState) => {
-	const { appState } = state;
+export const App: React.FC<RootState> = (redux: any) => {
+	
+	const { appState, store } = redux;
 	const dispatch = useDispatch();
+	console.log(' App Store: ', store);
+
+	const [state, setState] = useState({ dogs: [] as any });
 
 	/** @memoized */
 	const makeBreedsQuery = useCallback(
-		(id: number) => dispatch(ApolloActions.graphQL({ query: GET_BREEDS, variables: { id } })),
+		() => dispatch(ApolloActions.graphQL({ query: GET_BREEDS, variables: {} })),
 		[dispatch]
 	);
 
+	const toggleFavorites = (dog: Dog) => {
+		const mapped: Dog[] = state.dogs.map((item: Dog) => {
+			if (item.id != dog.id) {
+				item.isFavorite = false;
+			} else {
+				item.isFavorite = true;
+			}
+			return item;
+		})
+		setState({dogs: mapped})
+	}
+
+	useEffect(() => {
+        makeBreedsQuery();
+		
+		store.subscribe(() => {
+			const state = store.getState();
+			if (state.appState.storeState.dogs.length) {
+				setState({
+					dogs: [...cloneDeep(state.appState.storeState.dogs)] as any
+				})
+			}
+		})
+
+    }, []);
+
 	return (
 		<div className={`App ${appState.isLoadingData ? 'loading' : ''}`}>
-			<main className='grid-wrap'>
-				<div className='grid'>
-					<div className='nav-bar'>
-						<div className='app-info fixedHeightContainer'>
-							<label>App State</label>
-							<pre className='content'>{JSON.stringify(appState, null, 2)}</pre>
-						</div>
-						<br></br>
-						<label>Dog Breeds</label>
-						<br></br>
-						<br></br>
-						<div className='products'>
-							<button
-								onClick={() => {
-									makeBreedsQuery(1);
-								}}
-							>
-								Load Breeds
-							</button>
-							{appState.storeState?.breeds.map((breed: Breed) => {
-								return <div key={breed.id}>{breed.name}</div>;
-							})}
-						</div>
+			<div className="App">
+				<div className="wrapper">
+					<div className="box header">
+						<div className="app-title">Dog Breeds</div>
+					</div>
+					<div className="box content">
+
+						{/** Content */}
+						{state.dogs.map((dog: any) => {
+							return <DogComponent dog={dog} fun={{toggleFavorites}} ></DogComponent>
+						})}
+
+					</div>
+					<div className="box footer">
+
 					</div>
 				</div>
-			</main>
+			</div>
 		</div>
 	);
 };
@@ -56,3 +80,4 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<Action<any>>, props: any) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+

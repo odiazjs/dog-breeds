@@ -1,5 +1,5 @@
 import { Action } from 'redux-actions';
-import { Breed } from '../common/base-model';
+import { Dog } from '../common/base-model';
 import { ApolloActions } from './ApolloActions';
 import { AppActions } from './AppActions';
 import { FilterActions } from './FilterActions';
@@ -14,13 +14,13 @@ export interface AppState {
 }
 
 export interface StoreState {
-	breeds: Breed[];
+	dogs: Dog[];
 }
 
 export const initialAppState: AppState = {
 	isLoadingData: false,
 	storeState: {
-		breeds: []
+		dogs: []
 	}
 };
 

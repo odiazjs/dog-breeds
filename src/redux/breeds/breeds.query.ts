@@ -4,5 +4,16 @@ import { loader } from 'graphql.macro';
 const breedsGql = loader('./breeds.gql');
 
 export const GET_BREEDS = gql`
-	${breedsGql}
+	query GetBreeds {
+	dogs {
+		id,
+		breed,
+		subbreeds,
+		displayImage,
+		images {
+			id,
+			url
+		}
+  }
+}
 `;

@@ -54,7 +54,6 @@ export class ApolloEpics {
 				const apolloQuery$ = from(apolloClient.query({ query, variables }));
 
 				return apolloQuery$.pipe(
-					delay(5000),
 					map((graphqlResult: { data: any }) => {
 						return { type: 'STORE_STATE', payload: graphqlResult.data };
 					})
