@@ -6,8 +6,6 @@ export const FavoriteComponent: React.FC<any> = ({ appState }: { appState: AppSt
 
     const [state, setState] = useState({ ...favoriteModel, ...appState.favorite });
 
-    console.log('Favorite State : ', appState.favorite, state)
-
     return (
         <div className="cards">
             <div className="card favorite-container">

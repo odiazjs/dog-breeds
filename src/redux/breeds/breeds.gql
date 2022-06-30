@@ -1,4 +1,4 @@
-query GetBreeds($name: String) {
+query GetBreeds {
 	dogs {
 		id,
 		breed,
