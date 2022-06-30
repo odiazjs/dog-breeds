@@ -6,14 +6,13 @@ import { Provider } from 'react-redux';
 import { combineReducers, applyMiddleware, legacy_createStore } from 'redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { Action } from 'redux-actions';
-import { FilterEpics } from './redux/FilterEpics';
 import { appReducer, AppState, initialRootState, RootState } from './redux/AppReducer';
 import { AppEpics } from './redux/AppEpics';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from './config/ApolloClient';
 import { ApolloEpics } from './redux/ApolloEpics';
 
-export const epics = combineEpics(...AppEpics.init(), ...FilterEpics.init(), ...ApolloEpics.init());
+export const epics = combineEpics(...AppEpics.init(), ...ApolloEpics.init());
 
 export const reducers = combineReducers({
 	appState: appReducer

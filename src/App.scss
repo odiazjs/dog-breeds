@@ -20,8 +20,9 @@
   }
   
 .app-title {
-	padding: 2.5rem;
+	padding: 1rem;
 	color: snow;
+	background: saddlebrown;
 }
 
 .loading {
@@ -42,13 +43,13 @@
   
   .content {
 	grid-area: content;
-	padding: 175px 0px !important;
+	padding: 225px 0px !important;
 	margin: 15px;
   }
   
   .header {
 	grid-area: header;
-	height: 12vh;
+	height: auto;
 	position: fixed;
 	width: -webkit-fill-available;
 	z-index: 2;
@@ -78,7 +79,6 @@
   .box {
 	color: #fff;
 	border-radius: 0px;
-	padding: 4px;
 	font-size: 150%;
   }
   
@@ -176,9 +176,8 @@
   }
   
   .roster-container {
-	border: 1px solid;
+	border: 1px solid lightgray;
 	padding: 5px;
-	background: darkseagreen;
   }
   
   .roster-video {
@@ -191,11 +190,36 @@
   }
 
   .not-favorite {
-	position: absolute;
-	right: 110px;
 	opacity: 0.5;
+	float: right;
+	cursor: pointer;
   }
 
   .favorite {
 	opacity: 1 !important;
+  }
+
+  .img-dot {
+	border-radius: 50%;
+}
+
+  .favorite-container {
+	background: bisque;
+	.fav-img{
+		padding: 8px;
+	}
+  }
+
+  .fav-title {
+	  font-weight: 300;
+	  font-size: medium;
+  }
+
+  img {
+	border: 0px !important;
+	box-shadow: darkgrey 4px 4px 4px 4px;
+  }
+
+  .no-shadow {
+	  box-shadow: none !important;
   }

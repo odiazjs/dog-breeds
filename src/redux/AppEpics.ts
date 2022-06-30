@@ -3,13 +3,16 @@ import { ofType, StateObservable } from 'redux-observable';
 import { map } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { AppActions } from './AppActions';
-import { AppState } from './AppReducer';
+import { AppState, RootState } from './AppReducer';
 
 export class AppEpics {
-	constructor() {}
+	constructor() { }
 
 	static init() {
-		return [AppEpics.setStateEpic];
+		return [
+			AppEpics.setStateEpic,
+			AppEpics.setFavoriteEpic
+		];
 	}
 
 	static setStateEpic = (
@@ -19,8 +22,21 @@ export class AppEpics {
 		return action$.pipe(
 			ofType(AppActions.SET_STATE),
 			map((action: Action<AppState>) => {
-				console.warn(`Epic fired: { setStateEpic } - Action: ${JSON.stringify(action)}`);
+				console.info(`Epic fired: { setStateEpic } - Action: ${JSON.stringify(action)}`);
 				return { type: 'END_STATE', payload: action.payload };
+			})
+		);
+	};
+
+	static setFavoriteEpic = (
+		action$: Observable<Action<AppState>>,
+		state$: StateObservable<AppState>
+	): Observable<Action<AppState>> => {
+		return action$.pipe(
+			ofType(AppActions.SET_FAVORITE),
+			map((action: Action<any>) => {
+				console.info(`Epic fired: { setStateEpic } - Action: ${JSON.stringify(action)}`);
+				return { type: AppActions.SET_STATE, payload: action.payload };
 			})
 		);
 	};

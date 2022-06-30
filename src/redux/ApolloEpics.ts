@@ -4,6 +4,7 @@ import { delay, from, map, mergeMap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { apolloClient } from '../config/ApolloClient';
 import { ApolloActions, GraphqlAction } from './ApolloActions';
+import { AppActions } from './AppActions';
 import { AppState } from './AppReducer';
 
 export class ApolloEpics {
@@ -55,7 +56,7 @@ export class ApolloEpics {
 
 				return apolloQuery$.pipe(
 					map((graphqlResult: { data: any }) => {
-						return { type: 'STORE_STATE', payload: graphqlResult.data };
+						return { type: AppActions.SET_STATE, payload: graphqlResult.data };
 					})
 				);
 			})
@@ -70,7 +71,7 @@ export class ApolloEpics {
 			ofType(ApolloActions.MUTATION),
 			map((action: GraphqlAction<AppState>) => {
 				console.warn(`Epic fired: { mutationEpic } - GraphqlAction: ${JSON.stringify(action)}`);
-				return { type: 'END_STATE', payload: action.payload };
+				return { type: AppActions.SET_STATE, payload: action.payload };
 			})
 		);
 	};
