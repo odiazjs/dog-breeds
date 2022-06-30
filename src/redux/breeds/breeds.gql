@@ -1,0 +1,6 @@
+query GetBreeds($name: String) {
+	breeds(filter: { name: $name }) {
+		id
+		name
+	}
+}
