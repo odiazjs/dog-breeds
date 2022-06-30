@@ -176,9 +176,8 @@
   }
   
   .roster-container {
-	border: 1px solid;
+	border: 1px solid lightgray;
 	padding: 5px;
-	background: darkseagreen;
   }
   
   .roster-video {
@@ -193,6 +192,7 @@
   .not-favorite {
 	opacity: 0.5;
 	float: right;
+	cursor: pointer;
   }
 
   .favorite {
@@ -213,4 +213,13 @@
   .fav-title {
 	  font-weight: 300;
 	  font-size: medium;
+  }
+
+  img {
+	border: 0px !important;
+	box-shadow: darkgrey 4px 4px 4px 4px;
+  }
+
+  .no-shadow {
+	  box-shadow: none !important;
   }

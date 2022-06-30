@@ -2,11 +2,13 @@ import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dog, Favorite } from "../../common/base-model";
 import { AppActions } from "../../redux/AppActions";
+import { SubBreedComponent } from "../sub-breed/sub-breed-component";
+import { dogCompnentProps } from "./model";
 
 export const DogComponent: React.FC<{ dog: Dog, favorite: Favorite }> = ({ dog, favorite }) => {
 
     const dispatch = useDispatch();
-    const [state, setState] = useState(dog);
+    const [state, setState] = useState({ ...dog, ...dogCompnentProps });
 
     /** @memoized */
     const setFavorite = useCallback(
@@ -28,18 +30,18 @@ export const DogComponent: React.FC<{ dog: Dog, favorite: Favorite }> = ({ dog, 
 
                     </div>
                     <div className="grid-items">
-                        <img className="" src={dog.displayImage} width="200px" height="auto" style={{ border: '1px solid' }}></img>
+                        <img src={dog.displayImage} width="200px" height="auto" style={{ border: '1px solid' }}></img>
                     </div>
                     <div className="grid-items">
                         <div className={`not-favorite ${isFavorite(dog) ? 'favorite' : ''}`} onClick={() => {
-                            const favorite: Favorite = { 
-                                id: dog.id, 
+                            const favorite: Favorite = {
+                                id: dog.id,
                                 name: dog.breed,
                                 imgUrl: dog.displayImage
                             }
                             setFavorite(favorite);
                         }}>
-                            <img src={`./favorite-dog.png`} width="40px"></img>
+                            <img className="no-shadow" src={`./favorite-dog.png`} width="40px"></img>
                         </div>
                     </div>
                     <div className="grid-items grid-item-title">
@@ -50,13 +52,16 @@ export const DogComponent: React.FC<{ dog: Dog, favorite: Favorite }> = ({ dog, 
             <div className="card">
                 <div className="grid-container-roster">
                     <div onClick={() => {
-
+                        setState({ ...state, showSubBreeds: !state.showSubBreeds })
                     }}
                         className="grid-items grid-item-title">
-                        Show sub-breeds
+                        {state.showSubBreedsTitle}
                     </div>
                 </div>
             </div>
+            {state.showSubBreeds ? <div key={dog.id} className="card">
+                <SubBreedComponent dog={dog} favorite={favorite}></SubBreedComponent>
+            </div> : null}
         </div>
     )
 };

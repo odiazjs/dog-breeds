@@ -1,3 +1,4 @@
-export const model = {
-    id: 1
+export const dogCompnentProps = {
+    showSubBreedsTitle: 'Show sub-breeds',
+    showSubBreeds: false,
 }
